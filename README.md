@@ -89,10 +89,10 @@ python merge_pretrain.py
 
 #### 3.3 Train!
 ```
-bash train_sksmonstercalledlulu.sh
+bash train_bridge_clean.sh
 ```
 
-For personalized PhotoDoodles, please check the data folder and orgnize data like ours.
+For personalized robotic datasets, please check the data folder and orgnize data like ours.
 
 
 ### 4. Weights
