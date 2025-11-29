@@ -8,7 +8,7 @@ pipeline = FluxPipeline.from_pretrained(
     torch_dtype=torch.bfloat16,
 ).to('cuda')
 
-pipeline.load_lora_weights("nicolaus-huang/PhotoDoodle", weight_name="pretrain.safetensors")
+pipeline.load_lora_weights("yio-ye2004/lora_collection", weight_name="pretrain.safetensors")
 pipeline.fuse_lora()
 pipeline.unload_lora_weights()
 
