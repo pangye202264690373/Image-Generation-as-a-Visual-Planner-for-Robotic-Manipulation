@@ -1,9 +1,0 @@
-compute_environment: LOCAL_MACHINE
-distributed_type: NO
-num_processes: 1
-machine_rank: 0
-num_machines: 1
-gpu_ids: "0"
-mixed_precision: bf16
-downcast_bf16: no
-use_cpu: false

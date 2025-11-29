@@ -1,42 +1,26 @@
-# PhotoDoodle
+# PlanGen: Image Generation as a Visual Planner for Robotic Manipulation
 
-> **PhotoDoodle: Learning Artistic Image Editing from Few-Shot Pairwise Data**
+> **Image Generation as a Visual Planner for Robotic Manipulation**
 > <br>
-> [Huang Shijie](https://scholar.google.com/citations?user=HmqYYosAAAAJ), 
-> [Yiren Song](https://scholar.google.com.hk/citations?user=L2YS0jgAAAAJ), 
-> [Yuxuan Zhang](https://xiaojiu-z.github.io/YuxuanZhang.github.io/), 
-> [Hailong Guo](https://github.com/logn-2024), 
-> Xueyin Wang, 
-> and 
-> [Mike Zheng Shou](https://sites.google.com/view/showlab),
-> [Liu Jiaming](https://scholar.google.com/citations?user=SmL7oMQAAAAJ&hl=en)
-> <br>
-> [Show Lab](https://sites.google.com/view/showlab), National University of Singapore
-> <br>
-> Tiamat AI
+> [Pang Ye](https://scholar.google.com/citations?view_op=list_works&hl=zh-CN&user=KRO1nv0AAAAJ)  
+> South China University of Technology  
 > <br>
 
-<a href="https://arxiv.org/abs/2502.14397"><img src="https://img.shields.io/badge/ariXv-2502.14397-A42C25.svg" alt="arXiv"></a>
-<a href="https://huggingface.co/nicolaus-huang/PhotoDoodle"><img src="https://img.shields.io/badge/🤗_HuggingFace-Model-ffbd45.svg" alt="HuggingFace"></a>
-<a href="https://huggingface.co/datasets/nicolaus-huang/PhotoDoodle/"><img src="https://img.shields.io/badge/🤗_HuggingFace-Dataset-ffbd45.svg" alt="HuggingFace"></a>
-<a href="https://huggingface.co/spaces/ameerazam08/PhotoDoodle-Image-Edit-GPU"><img src="https://img.shields.io/badge/🤗_HuggingFace-Space-ffbd45.svg" alt="HuggingFace"></a>
+<!-- Badges (links to be filled later) -->
+<a href=""><img src="https://img.shields.io/badge/arXiv-coming_soon-A42C25.svg" alt="arXiv"></a>
+<a href=""><img src="https://img.shields.io/badge/🤗_HuggingFace-Model-ffbd45.svg" alt="HuggingFace Model"></a>
+<a href=""><img src="https://img.shields.io/badge/🤗_HuggingFace-Dataset-ffbd45.svg" alt="HuggingFace Dataset"></a>
 
 <br>
 
-<img src='./assets/teaser.png' width='100%' />
-
-## Community Resources
-[smthemex/ComfyUI_PhotoDoodle](https://github.com/smthemex/ComfyUI_PhotoDoodle): Intergrating PhotoDoodle into Comfyui nodes, 12 GB GPU memory required for inferencing.
-
-[ameerazam08/PhotoDoodle-Image-Edit-GPU](https://huggingface.co/spaces/ameerazam08/PhotoDoodle-Image-Edit-GPU): PhotoDoodle deployment on huggingface space.
-
+<img src='./assets/Teaser.png' width='100%' />
 
 ## Quick Start
 ### Configuration
 #### 1. **Environment setup**
 ```bash
-git clone git@github.com:showlab/PhotoDoodle.git
-cd PhotoDoodle
+git clone https://github.com/pangye202264690373/Image-Generation-as-a-Visual-Planner-for-Robotic-Manipulation.git
+cd Image-Generation-as-a-Visual-Planner-for-Robotic-Manipulation
 
 conda create -n doodle python=3.11.10
 conda activate doodle
