@@ -12,4 +12,4 @@ pipeline.load_lora_weights("yio-ye2004/lora_collection", weight_name="pretrain.s
 pipeline.fuse_lora()
 pipeline.unload_lora_weights()
 
-pipeline.save_pretrained("PhotoDoodle_Pretrain")
+pipeline.save_pretrained("Pretrain")

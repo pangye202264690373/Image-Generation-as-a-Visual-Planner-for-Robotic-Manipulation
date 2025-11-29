@@ -22,8 +22,8 @@
 git clone https://github.com/pangye202264690373/Image-Generation-as-a-Visual-Planner-for-Robotic-Manipulation.git
 cd Image-Generation-as-a-Visual-Planner-for-Robotic-Manipulation
 
-conda create -n doodle python=3.11.10
-conda activate doodle
+conda create -n PlanGen python=3.11.10
+conda activate PlanGen
 ```
 #### 2. **Requirements installation**
 ```bash
@@ -46,11 +46,11 @@ pipeline = FluxPipeline.from_pretrained(
     torch_dtype=torch.bfloat16,
 ).to('cuda')
 
-pipeline.load_lora_weights("nicolaus-huang/PhotoDoodle", weight_name="pretrain.safetensors")
+pipeline.load_lora_weights("yio-ye2004/lora_collection", weight_name="pretrain.safetensors")
 pipeline.fuse_lora()
 pipeline.unload_lora_weights()
 
-pipeline.load_lora_weights("nicolaus-huang/PhotoDoodle", weight_name="sksmagiceffects.safetensors")
+pipeline.load_lora_weights("yio-ye2004/lora_collection", weight_name="bridge_clean_pytorch_lora_weights.safetensors")
 
 height=768
 width=512
@@ -79,7 +79,7 @@ python inference.py
 
 #### 3.1 Get data from huggingface dataset
 ```
-huggingface-cli download --repo-type dataset --local-dir data nicolaus-huang/PhotoDoodle
+huggingface-cli download --repo-type dataset --local-dir data yio-ye2004/lora_collection
 ```
 
 #### 3.2 Get pretrained model for edit-lora trainning
@@ -96,17 +96,20 @@ For personalized robotic datasets, please check the data folder and orgnize data
 
 
 ### 4. Weights
-You can download the trained checkpoints of PhotoDoodle for inference. Below are the details of available models, checkpoint name are also trigger words.
+You can download the trained checkpoints of PlanGen for inference. Below are the details of available models, checkpoint name are also trigger words.
 
 You would need to load and fuse the `pretrained ` checkpoints model in order to load the other models.
 
-|                          **Model**                           |                       **Description**                       | **Resolution** |
-| :----------------------------------------------------------: | :---------------------------------------------------------: | :------------: |
-| [pretrained](https://huggingface.co/nicolaus-huang/PhotoDoodle/blob/main/pretrain.safetensors) |       PhotoDoodle model trained on `SeedEdit` dataset       |    768, 768    |
-| [sksmonstercalledlulu](https://huggingface.co/nicolaus-huang/PhotoDoodle/blob/main/sksmonstercalledlulu.safetensors) |   PhotoDoodle model trained on `Cartoon monster` dataset    |    768, 512    |
-| [sksmagiceffects](https://huggingface.co/nicolaus-huang/PhotoDoodle/blob/main/sksmagiceffects.safetensors) |      PhotoDoodle model trained on `3D effects` dataset      |    768, 512    |
-| [skspaintingeffects ](https://huggingface.co/nicolaus-huang/PhotoDoodle/blob/main/skspaintingeffects.safetensors) | PhotoDoodle model trained on `Flowing color blocks` dataset |    768, 512    |
-| [sksedgeeffect ](https://huggingface.co/nicolaus-huang/PhotoDoodle/blob/main/sksedgeeffect.safetensors) |  PhotoDoodle model trained on `Hand-drawn outline` dataset  |    768, 512    |
+|                           **Model**                           |                      **Description**                      | **Resolution** |
+| :-----------------------------------------------------------: | :--------------------------------------------------------: | :------------: |
+| [pretrained](https://huggingface.co/yio-ye2004/lora_collection/blob/main/pretrained.safetensors) |                 Base LoRA for PlanGen                 |                |
+| [bridge_clean](https://huggingface.co/yio-ye2004/lora_collection/blob/main/bridge_clean_pytorch_lora_weights.safetensors) |         LoRA trained on `bridge_clean`         |                |
+| [bridge_traj](https://huggingface.co/yio-ye2004/lora_collection/blob/main/bridge_traj_pytorch_lora_weights.safetensors) |         PlanGen LoRA trained on `bridge_traj`         |                |
+| [jocoplay_clean](https://huggingface.co/yio-ye2004/lora_collection/blob/main/jocoplay_clean_pytorch_lora_weights.safetensors) |       PlanGen LoRA trained on `jocoplay_clean`        |                |
+| [jocoplay_traj](https://huggingface.co/yio-ye2004/lora_collection/blob/main/jocoplay_traj_pytorch_lora_weights.safetensors) |        PlanGen LoRA trained on `jocoplay_traj`        |                |
+| [rt1_clean](https://huggingface.co/yio-ye2004/lora_collection/blob/main/rt1_clean_pytorch_lora_weights.safetensors) |          PlanGen LoRA trained on `rt1_clean`          |                |
+| [rt1_traj](https://huggingface.co/yio-ye2004/lora_collection/blob/main/rt1_traj_pytorch_lora_weights.safetensors) |          PlanGen LoRA trained on `rt1_traj`           |                |
+
 
 
 ### 5. Dataset
@@ -121,30 +124,15 @@ Example format:
 {"source": "path/to/source2.jpg", "target": "path/to/modified2.jpg", "caption": "Another instruction"}
 ```
 
-We have uploaded our datasets to [Hugging Face](https://huggingface.co/datasets/nicolaus-huang/PhotoDoodle).
-
 
 ### 6. Results
 
-![R-F](./assets/R-F.jpg)
+![R-F](./assets/Visual_Comparisons.png)
 
 
 ### 7. Acknowledgments  
 
-1. Thanks to **[Yuxuan Zhang](https://xiaojiu-z.github.io/YuxuanZhang.github.io/)** and **[Hailong Guo](mailto:guohailong@bupt.edu.cn)** for providing the code base.  
+1. Thanks to **[Show Lab](https://github.com/showlab/photodoodle)** for providing the code base.  
 2. Thanks to **[Diffusers](https://github.com/huggingface/diffusers)** for the open-source project.
-3. Thanks to **[AMEERAZAM08](https://github.com/AMEERAZAM08)** for contributing the huggingface space demo.
-4. Thanks to **[smthemex](https://github.com/smthemex)** for contributing the comfyui integration.
 
-## Citation
-```
-@misc{huang2025photodoodlelearningartisticimage,
-      title={PhotoDoodle: Learning Artistic Image Editing from Few-Shot Pairwise Data}, 
-      author={Shijie Huang and Yiren Song and Yuxuan Zhang and Hailong Guo and Xueyin Wang and Mike Zheng Shou and Jiaming Liu},
-      year={2025},
-      eprint={2502.14397},
-      archivePrefix={arXiv},
-      primaryClass={cs.CV},
-      url={https://arxiv.org/abs/2502.14397}, 
-}
-```
+
