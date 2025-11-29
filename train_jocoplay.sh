@@ -1,0 +1,27 @@
+export MODEL_DIR="./PhotoDoodle_Pretrain" # you may need to modity this in order to train your own model
+export OUTPUT_DIR="outputs/jocoplay"
+export CONFIG="./default_config.yaml"
+export TRAIN_DATA="/root/PhotoDoodle/data/joco_merge_clean_fulltext/text_augmented.jsonl"
+export LOG_PATH="$OUTPUT_DIR/log"
+
+CUDA_VISIBLE_DEVICES=0 accelerate launch --config_file $CONFIG train_lora_flux_pe.py \
+    --pretrained_model_name_or_path $MODEL_DIR \
+    --width 672 \
+    --height 672 \
+    --source_column="source" \
+    --target_column="target" \
+    --caption_column="text" \
+    --output_dir=$OUTPUT_DIR \
+    --logging_dir=$LOG_PATH \
+    --mixed_precision="bf16" \
+    --train_data_dir=$TRAIN_DATA \
+    --rank=128 \
+    --learning_rate=1e-4 \
+    --train_batch_size=1 \
+    --num_validation_images=2 \
+    --validation_image "/root/PhotoDoodle/data/joco_merge_clean_fulltext/000975_ff.png" \
+    --validation_prompt "A structured progression of 9 cells in a grid illustrates how the robot aims to pick up the long bread." \
+    --num_train_epochs=1 \
+    --validation_steps=2000 \
+    --checkpointing_steps=2000 \
+    --resume_from_checkpoint "/root/PhotoDoodle/outputs/jocoplay/checkpoint-12000" 
